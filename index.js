@@ -6,6 +6,11 @@ import { apiRequest } from "./apiRequest.js";
 // Display my reading list
 function displayReadingList(readingList){
     console.log(`\nMy Reading List:`)
+
+    if(!readingList.length){
+        console.log(`\nEMPTY\n`)
+    }
+
     readingList.forEach((book, i) => {
         console.log(`\n${i + 1}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})\n`)
     });
@@ -26,15 +31,19 @@ function addToReadingList(searchResults){
             name: "book",
             message: "Enter the number of the book you want to add to your reading list:",
             validate: input => {
-                if(input > 0 && input < searchResults.length){
+                if(input > 0 && input < 6){
                     return true;
                 } else {
-                    console.log(`\nUnable to add book. Try again`)
-                    return addToReadingList(searchResults)
+                    console.log(`\nUnable to add book. Try again`);
+                    return false;
                 }
             }
         }
     ]).then((selection) => {
+        // Try again if bad selection
+        if(!selection){
+            addToReadingList(searchResults);
+        }
         // Select book
         let book = searchResults[selection.book - 1]
         // Add selected book to reading list
@@ -48,10 +57,10 @@ function addToReadingList(searchResults){
 
 
 // Displays results from book search
-function searchResults(books){
+function bookSearchResults(books){
     if(!books){
-        console.log(`\nBook not found. Try again.`)
-        return searchForBookQuestion()
+        console.log(`\nBook not found. Try again. bookSearchResults`)
+        return false;
     }
 
     console.log(`\nResults: `)
@@ -100,26 +109,40 @@ function selectionPrompt(books, readingList){
 
 // Prompts the user to search for a book
 function searchQuery(){
-    inquirer.prompt([
+    inquirer
+      .prompt([
         {
-            type: "input",
-            name: "query",
-            message: "What is the name of the book you are looking for?"
-        }
-    ]).then((search) => {
-        // Makes a request to the Google Books API
-        apiRequest(search.query, (books) => {
+          type: "input",
+          name: "query",
+          message: "What is the name of the book you are looking for?",
+          validate: (input) => {
+            if (input.length) {
+              return true;
+            } else {
+              console.log(`\nBook not found. Try again.`);
+              return false;
+            }
+          },
+        },
+      ])
+      .then((search) => {
+        if (!search) {
+          searchQuery();
+        } else {
+          // Makes a request to the Google Books API
+          apiRequest(search.query, (books) => {
             // Displays results from book search
-            searchResults(books)
+            bookSearchResults(books);
             // Displays a new menu after results return
             let readingList = [];
             // Check if reading list file exists
             if (fs.existsSync("reading-list.json")) {
-                readingList = JSON.parse(fs.readFileSync("reading-list.json"));
+              readingList = JSON.parse(fs.readFileSync("reading-list.json"));
             }
-            selectionPrompt(books, readingList)
-        })
-    })
+            selectionPrompt(books, readingList);
+          });
+        }
+      });
 }
 
 
