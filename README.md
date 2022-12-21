@@ -7,14 +7,16 @@ To use with JavaScript, simply type `node index.js` from the folder's root direc
 
 
 ## Code
+Throughout the code, there are many callbacks being used within functions. This is to follow the *DRY* method, in order to avoid repetition and to maintain seamless functionality with each request.
+
 When you first start the application, you will notice there are three menu options listed for you
-`"Search for a book", "View my reading list", ` and `"Exit"`.
+`"Search for a book"`, `"View my reading list"`, and `"Exit"`.
 
 As you begin your searches, you will notice that the menu slightly changes to include a fourth option `Add book to my reading list`. Selecting this option will then ask you to enter a number that corresponds to the book. This makes the experience far more user-friendly rather than typing out the entire name of the book.
 
 ## Edge Cases
 - No books result
-    - You'll see a message stating no books were found if no results are returned
+    - You'll see a message stating no books were found if no results are returned from your search.
 
 - Entering invalid book number
     - Books results are displayed numbered from 1 - 5. In order to add a book, you must select the number next to the book you wish to add. If you enter an invalid number, it will respond with an error, and prompt you to try again.
