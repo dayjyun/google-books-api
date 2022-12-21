@@ -7,7 +7,7 @@ import { apiRequest } from "./apiRequest.js";
 function displayReadingList(readingList){
     console.log(`\nMy Reading List:`)
     readingList.forEach((book, i) => {
-        console.log(`${i + 1}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
+        console.log(`\n${i + 1}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
     });
 }
 
