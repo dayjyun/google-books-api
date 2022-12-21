@@ -115,20 +115,12 @@ function searchQuery(){
           type: "input",
           name: "query",
           message: "What is the name of the book you are looking for?",
-          validate: (input) => {
-            if (input.length) {
-              return true;
-            } else {
-              console.log(`\nBook not found. Try again.`);
-              return false;
-            }
-          },
         },
       ])
       .then((search) => {
         if (!search) {
-          searchQuery();
-        } else {
+          return searchQuery();
+        }
           // Makes a request to the Google Books API
           apiRequest(search.query, (books) => {
             // Displays results from book search
@@ -141,7 +133,7 @@ function searchQuery(){
             }
             selectionPrompt(books, readingList);
           });
-        }
+        
       });
 }
 
