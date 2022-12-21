@@ -27,7 +27,7 @@ function addToReadingList(searchResults){
             name: "book",
             message: "Enter the name of the book you want to add to your reading list: ",
             validate: input => {
-                if(input.name === input.message){
+                if(input.name.toLowerCase() === input.message.toLowerCase()){
                     return true;
                 }
             }
