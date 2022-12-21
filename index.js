@@ -40,12 +40,9 @@ function searchResults(books){
     }
 }
 
-function selectionPrompt(){
-  // what do to after search results?
+function selectionPrompt(books){
   // add to list
-  // search for a new book
   // view my list
-  // close application
 
   inquirer
     .prompt([
@@ -93,7 +90,8 @@ function searchQuery(){
         apiRequest(search.query, (books) => {
             // Displays results from book search
             searchResults(books)
-            selectionPrompt()
+            // Displays a new menu after results return
+            selectionPrompt(books)
         })
     })
 }
