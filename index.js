@@ -6,8 +6,8 @@ import { apiRequest } from "./apiRequest.js";
 // Display my reading list
 function displayReadingList(readingList){
     console.log(`My Reading List: `)
-    readingList.forEach(book => {
-        `"${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`
+    readingList.forEach((book, i) => {
+        `${i + 1}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`
     });
 }
 
@@ -57,7 +57,7 @@ function searchResults(books){
 
     for(let i = 0; i < 5; i++){
         let book = books[i]
-        console.log(`${[i + 1]}) "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
+        console.log(`${[i + 1]}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
     }
 }
 
