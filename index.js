@@ -1,7 +1,21 @@
 import inquirer from "inquirer";
 import request from "request";
 import fs from 'fs';
-import { apiRequest } from "./apiRequest.js";
+
+// Makes request to the Google Books API
+function apiRequest(query, callback) {
+  request(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=AIzaSyAJWbVyKezNHmebT3Wa7Xza5PX3AMNYcM8`,
+    (error, response, body) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      const data = JSON.parse(body);
+      callback(data.items);
+    }
+  );
+}
 
 
 // Display my reading list
@@ -123,7 +137,7 @@ function searchQuery(){
           // Makes a request to the Google Books API
           apiRequest(search.query, (books) => {
             if(!books){
-                console.log(`No books found. Try again.`)
+                console.log(`\nNo books found. Try again.`)
                 return searchQuery()
             }
             // Displays results from book search
