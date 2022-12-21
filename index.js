@@ -3,6 +3,16 @@ import request from "request";
 import fs from 'fs';
 import { apiRequest } from "./apiRequest.js";
 
+function searchForBookQuestion(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "question",
+            message: "What is the name of the book you are looking for?"
+        }
+    ]).then()
+}
+
 function start(){
     let readingList = [];
     // Check if reading list file exists
@@ -14,14 +24,15 @@ function start(){
     inquirer.prompt([
         {
             type: "list",
-            name: "choice",
+            name: "option",
             message: "What would you like to do?",
-            choices: ["Search for a book", "View my reading list", "Quit"]
+            options: ["Search for a book", "View my reading list", "Quit"]
         }
-    ]).then((answers) => {
-        if(answers.choice === "Search for a book"){
+    ]).then((selection) => {
+        if(selection.option === "Search for a book"){
             // display a search query
-        } else if (answers.choice === "View my reading list"){
+            searchforBookQuestion()
+        } else if (selection.option === "View my reading list"){
             // display my reading list
         } else {
             // Close the application
