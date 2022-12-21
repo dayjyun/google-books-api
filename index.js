@@ -3,6 +3,9 @@ import request from "request";
 import fs from 'fs';
 import { apiRequest } from "./apiRequest.js";
 
+// Adds a book to the reading list
+
+// Prompts the user to search for a book
 function searchForBookQuestion(){
     inquirer.prompt([
         {
@@ -13,7 +16,7 @@ function searchForBookQuestion(){
     ]).then((search) => {
         // Makes a request to the Google Books API
         apiRequest(search.question, (books) => {
-            // Returns the list of book results
+            // Displays results from book search
         })
     })
 }
