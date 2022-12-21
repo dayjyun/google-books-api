@@ -5,9 +5,9 @@ import { apiRequest } from "./apiRequest.js";
 
 // Display my reading list
 function displayReadingList(readingList){
-    console.log(`My Reading List: `)
+    console.log(`\nMy Reading List:`)
     readingList.forEach((book, i) => {
-        `${i + 1}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`
+        console.log(`${i + 1}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
     });
 }
 
@@ -19,8 +19,7 @@ function addToReadingList(searchResults){
     if (fs.existsSync("reading-list.json")) {
         readingList = JSON.parse(fs.readFileSync("reading-list.json"));
     }
-    // Pass in the array of books
-    // Add book by name
+
     inquirer.prompt([
         {
             type: "input",
@@ -30,7 +29,7 @@ function addToReadingList(searchResults){
                 if(input > 0 && input < searchResults.length){
                     return true;
                 } else {
-                    console.log(` Unable to add book`)
+                    console.log(`\nUnable to add book`)
                 }
             }
         }
@@ -50,16 +49,19 @@ function addToReadingList(searchResults){
 // Displays results from book search
 function searchResults(books){
     if(!books){
-        console.log(`Book not found. Try again.`)
+        console.log(`\nBook not found. Try again.`)
         return searchForBookQuestion()
     }
 
+    console.log(`\nResults: `)
     for(let i = 0; i < 5; i++){
         let book = books[i]
-        console.log(`${[i + 1]}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
+        console.log(`\n${[i + 1]}. "${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})\n`)
     }
 }
 
+
+// Secondary Menu
 function selectionPrompt(books, readingList){
   inquirer
     .prompt([
@@ -89,7 +91,7 @@ function selectionPrompt(books, readingList){
         start();
       } else {
         // Quit the application
-        console.log("Goodbye!");
+        console.log("\nGoodbye!");
       }
     });
 }
@@ -119,6 +121,8 @@ function searchQuery(){
     })
 }
 
+
+// Start the application
 function start(){
     let readingList = [];
     // Check if reading list file exists
@@ -145,7 +149,7 @@ function start(){
             start()
         } else {
             // Close the application
-            console.log('Goodbye!')
+            console.log('\nGoodbye!')
         }
     })
 }
