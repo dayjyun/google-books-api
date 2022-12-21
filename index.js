@@ -33,8 +33,15 @@ function selectionPrompt(){
         choices: ["Add book to my reading list", "Search for a book", "View my reading list", "Quit"],
       },
     ]).then((selection) => {
-        if(selection.choice === choices[0]){
-            console.log("Yes")
+        if (selection.choice === "Add book to my reading list") {
+          console.log("Added");
+        } else if(selection.choice === "Search for a book"){
+            searchQuery()
+        } else if(selection.choice === "View my reading list"){
+            // Views reading list
+        } else {
+            // Quit the application
+            console.log("Goodbye!")
         }
     })
 }
