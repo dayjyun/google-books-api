@@ -10,7 +10,12 @@ function searchForBookQuestion(){
             name: "question",
             message: "What is the name of the book you are looking for?"
         }
-    ]).then()
+    ]).then((search) => {
+        // Makes a request to the Google Books API
+        apiRequest(search.question, (books) => {
+            // Returns the list of book results
+        })
+    })
 }
 
 function start(){
@@ -31,7 +36,7 @@ function start(){
     ]).then((selection) => {
         if(selection.option === "Search for a book"){
             // display a search query
-            searchforBookQuestion()
+            searchForBookQuestion()
         } else if (selection.option === "View my reading list"){
             // display my reading list
         } else {
