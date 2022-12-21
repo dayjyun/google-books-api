@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 import request from "request";
-import fs, { read } from 'fs';
+import fs from 'fs';
 import { apiRequest } from "./apiRequest.js";
 
 // Display my reading list
@@ -13,17 +13,31 @@ function displayReadingList(readingList){
 
 
 // Adds a book to the reading list
-function addToReadingList(){
+function addToReadingList(searchResults){
     // Pass in the array of books
     // Add book by name
     inquirer.prompt([
         {
             type: "input",
             name: "book",
-            message: "Enter the name of the book you want to add to your reading list: "
+            message: "Enter the name of the book you want to add to your reading list: ",
+            validate: input => {
+                if(input.name === input.message){
+                    return true;
+                }
+            }
         }
-    ])
-    // console.log(`${book} added to reading list!`)
+    ]).then((selection) => {
+        for(let i = 0; i < searchResults.length; i++){
+            let book = readingList[i]
+            if(book === selection){
+
+            }
+        }
+        // console.log(`${book} added to reading list!`)
+        // Start the application again
+        start()
+    })
 }
 
 
@@ -41,7 +55,6 @@ function searchResults(books){
 }
 
 function selectionPrompt(books){
-  // add to list
   // view my list
 
   inquirer
@@ -60,10 +73,10 @@ function selectionPrompt(books){
     ])
     .then((selection) => {
       if (selection.choice === "Add book to my reading list") {
-        // Add book to reading list
-        // what am I passing through?
-        addToReadingList();
+        // Add book to reading list prompt
+        addToReadingList(books);
       } else if (selection.choice === "Search for a book") {
+        // New search for book
         searchQuery();
       } else if (selection.choice === "View my reading list") {
         // Display my reading list
@@ -113,7 +126,7 @@ function start(){
         }
     ]).then((selection) => {
         if(selection.choice === "Search for a book"){
-            // Display a search query
+            // Display a search query to search for a book by name
             searchQuery()
         } else if (selection.choice === "View my reading list"){
             // Display my reading list
