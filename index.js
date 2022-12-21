@@ -22,7 +22,7 @@ function displayReadingList(readingList){
 // Adds a book to the reading list
 function addToReadingList(searchResults){
     let readingList = [];
-    // Check if reading list file exists
+    // Check if reading list JSON file exists
     if (fs.existsSync("reading-list.json")) {
         readingList = JSON.parse(fs.readFileSync("reading-list.json"));
     }
@@ -128,12 +128,13 @@ function searchQuery(){
             }
             // Displays results from book search
             bookSearchResults(books);
-            // Displays a new menu after results return
+
             let readingList = [];
-            // Check if reading list file exists
+            // Check if reading list JSON file exists
             if (fs.existsSync("reading-list.json")) {
-              readingList = JSON.parse(fs.readFileSync("reading-list.json"));
+                readingList = JSON.parse(fs.readFileSync("reading-list.json"));
             }
+            // Displays a new menu after results return
             selectionPrompt(books, readingList);
           });
 
@@ -144,7 +145,7 @@ function searchQuery(){
 // Start the application
 function start(){
     let readingList = [];
-    // Check if reading list file exists
+    // Check if reading list JSON file exists
     if(fs.existsSync('reading-list.json')){
         readingList = JSON.parse(fs.readFileSync("reading-list.json"))
     }
