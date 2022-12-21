@@ -3,6 +3,14 @@ import request from "request";
 import fs from 'fs';
 import { apiRequest } from "./apiRequest.js";
 
+// Display my reading list
+
+
+
+// Adds a book to the reading list
+
+
+
 // Displays results from book search
 function searchResults(books){
     if(!books){
@@ -16,10 +24,9 @@ function searchResults(books){
     }
 }
 
-// Adds a book to the reading list
 
 // Prompts the user to search for a book
-function searchForBookQuestion(){
+function searchQuery(){
     inquirer.prompt([
         {
             type: "input",
@@ -31,6 +38,11 @@ function searchForBookQuestion(){
         apiRequest(search.query, (books) => {
             // Displays results from book search
             searchResults(books)
+            // what do to after search results?
+            // add to list
+            // search for a new book
+            // view my list
+            // close application
         })
     })
 }
@@ -52,10 +64,10 @@ function start(){
         }
     ]).then((selection) => {
         if(selection.choice === "Search for a book"){
-            // display a search query
-            searchForBookQuestion()
+            // Display a search query
+            searchQuery()
         } else if (selection.choice === "View my reading list"){
-            // display my reading list
+            // Display my reading list
         } else {
             // Close the application
             console.log('Goodbye!')
