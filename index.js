@@ -3,10 +3,12 @@ import request from "request";
 import fs from 'fs';
 import { apiRequest } from "./apiRequest.js";
 
+
 // Display my reading list
 function displayReadingList(readingList){
-    console.log(`\nMy Reading List:`)
+    console.log(`\nMy Reading List: ${readingList.length === 1 ? readingList.length + " Book": readingList.length + " Books"}`)
 
+    // If there are no books on reading list
     if(!readingList.length){
         console.log(`\nEMPTY\n`)
     }
@@ -40,29 +42,29 @@ function addToReadingList(searchResults){
             }
         }
     ]).then((selection) => {
-        // Try again if bad selection
-        if(!selection){
-            addToReadingList(searchResults);
-        }
         // Select book
         let book = searchResults[selection.book - 1]
-        // Add selected book to reading list
-        readingList.push(book);
-        fs.writeFileSync("reading-list.json", JSON.stringify(readingList));
-        console.log(`\n"${book.volumeInfo.title}" added to your reading list!`);
-        // Start the application again
-        start()
+        // Check if book is already in the reading list
+         if (readingList.some((bk) => bk.title === book.title && bk.authors === book.authors)) {
+           console.log(`\nBook is already in your reading list`);
+           // Start the application again
+           start();
+         } else {
+           // Add selected book to reading list
+           readingList.push(book);
+           fs.writeFileSync("reading-list.json", JSON.stringify(readingList));
+           console.log(
+             `\n"${book.volumeInfo.title}" added to your reading list!`
+           );
+           // Start the application again
+           start();
+         }
     })
 }
 
 
 // Displays results from book search
 function bookSearchResults(books){
-    if(!books){
-        console.log(`\nBook not found. Try again. bookSearchResults`)
-        return false;
-    }
-
     console.log(`\nResults: `)
     for(let i = 0; i < 5; i++){
         let book = books[i]
@@ -118,11 +120,12 @@ function searchQuery(){
         },
       ])
       .then((search) => {
-        if (!search) {
-          return searchQuery();
-        }
           // Makes a request to the Google Books API
           apiRequest(search.query, (books) => {
+            if(!books){
+                console.log(`No books found. Try again.`)
+                return searchQuery()
+            }
             // Displays results from book search
             bookSearchResults(books);
             // Displays a new menu after results return
@@ -133,7 +136,7 @@ function searchQuery(){
             }
             selectionPrompt(books, readingList);
           });
-        
+
       });
 }
 
