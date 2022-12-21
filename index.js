@@ -32,9 +32,9 @@ function addToReadingList(searchResults){
             let book = readingList[i]
             if(book === selection){
 
+                console.log(`${book} added to reading list!`)
             }
         }
-        // console.log(`${book} added to reading list!`)
         // Start the application again
         start()
     })
