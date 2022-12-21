@@ -24,6 +24,18 @@ function searchResults(books){
     }
 }
 
+function selectionPrompt(){
+    inquirer.prompt([
+      {
+        type: "list",
+        name: "choice",
+        message: "What would you like to do?",
+        choices: ["Search for a book", "View my reading list", "Quit"],
+      },
+    ]);
+}
+
+
 
 // Prompts the user to search for a book
 function searchQuery(){
