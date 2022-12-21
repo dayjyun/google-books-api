@@ -25,23 +25,18 @@ function addToReadingList(searchResults){
         {
             type: "input",
             name: "book",
-            message: "Enter the name of the book you want to add to your reading list: ",
+            message: "Enter the number of the book you want to add to your reading list:",
             validate: input => {
-                if(input.name.toLowerCase() === input.message.toLowerCase()){
+                if(input < 0 && input < searchResults.length){
                     return true;
                 }
             }
         }
     ]).then((selection) => {
-        for(let i = 0; i < searchResults.length; i++){
-            let book = searchResults[i];
-            if(book === selection){
-                readingList.push(book)
-                console.log(`${book} added to reading list!`)
-            } else {
-                console.log(`Unable to add book`)
-            }
-        }
+        let book = searchResults[selection - 1]
+        readingList.push(book);
+        fs.writeFileSync("reading-list.json", JSON.stringify(list));
+        console.log(`\n"${book.volumeInfo.title}" added to reading list!`);
         // Start the application again
         start()
     })
