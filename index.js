@@ -22,12 +22,12 @@ function searchForBookQuestion(){
     inquirer.prompt([
         {
             type: "input",
-            name: "question",
+            name: "query",
             message: "What is the name of the book you are looking for?"
         }
     ]).then((search) => {
         // Makes a request to the Google Books API
-        apiRequest(search.question, (books) => {
+        apiRequest(search.query, (books) => {
             // Displays results from book search
             searchResults(books)
         })
