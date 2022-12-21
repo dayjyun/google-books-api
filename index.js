@@ -59,7 +59,7 @@ function addToReadingList(searchResults){
         // Select book
         let book = searchResults[selection.book - 1]
         // Check if book is already in the reading list
-         if (readingList.some((bk) => bk.title === book.title && bk.authors === book.authors)) {
+         if (readingList.some((bk) => bk.id === book.id)) {
            console.log(`\nBook is already in your reading list`);
            // Start the application again
            start();
