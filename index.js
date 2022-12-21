@@ -3,6 +3,13 @@ import request from "request";
 import fs from 'fs';
 import { apiRequest } from "./apiRequest.js";
 
+// Displays results from book search
+function searchResults(books){
+    if(!books){
+        console.log(`Book not found`)
+    }
+}
+
 // Adds a book to the reading list
 
 // Prompts the user to search for a book
