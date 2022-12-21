@@ -32,7 +32,11 @@ function selectionPrompt(){
         message: "What would you like to do?",
         choices: ["Add book to my reading list", "Search for a book", "View my reading list", "Quit"],
       },
-    ]);
+    ]).then((selection) => {
+        if(selection.choice === choices[0]){
+            console.log("Yes")
+        }
+    })
 }
 
 
