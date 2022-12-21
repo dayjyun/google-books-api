@@ -85,7 +85,7 @@ function selectionPrompt(books, readingList){
           "Add book to my reading list",
           "Search for a book",
           "View my reading list",
-          "Quit",
+          "Exit",
         ],
       },
     ])
@@ -102,7 +102,7 @@ function selectionPrompt(books, readingList){
         // Show the main menu again
         start();
       } else {
-        // Quit the application
+        // Close the application
         console.log("\nGoodbye!");
       }
     });
@@ -155,7 +155,7 @@ function start(){
             type: "list",
             name: "choice",
             message: "What would you like to do?",
-            choices: ["Search for a book", "View my reading list", "Quit"]
+            choices: ["Search for a book", "View my reading list", "Exit"]
         }
     ]).then((selection) => {
         if(selection.choice === "Search for a book"){
