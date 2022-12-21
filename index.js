@@ -41,27 +41,41 @@ function searchResults(books){
 }
 
 function selectionPrompt(){
-    inquirer.prompt([
+  // what do to after search results?
+  // add to list
+  // search for a new book
+  // view my list
+  // close application
+
+  inquirer
+    .prompt([
       {
         type: "list",
         name: "choice",
         message: "What would you like to do?",
-        choices: ["Add book to my reading list", "Search for a book", "View my reading list", "Quit"],
+        choices: [
+          "Add book to my reading list",
+          "Search for a book",
+          "View my reading list",
+          "Quit",
+        ],
       },
-    ]).then((selection) => {
-        if (selection.choice === "Add book to my reading list") {
-            // Add book to reading list
-            // what am I passing through?
-            addToReadingList()
-        } else if(selection.choice === "Search for a book"){
-            searchQuery()
-        } else if(selection.choice === "View my reading list"){
-            // Views reading list
-        } else {
-            // Quit the application
-            console.log("Goodbye!")
-        }
-    })
+    ])
+    .then((selection) => {
+      if (selection.choice === "Add book to my reading list") {
+        // Add book to reading list
+        // what am I passing through?
+        addToReadingList();
+      } else if (selection.choice === "Search for a book") {
+        searchQuery();
+      } else if (selection.choice === "View my reading list") {
+        // Display my reading list
+        displayReadingList();
+      } else {
+        // Quit the application
+        console.log("Goodbye!");
+      }
+    });
 }
 
 
@@ -79,11 +93,6 @@ function searchQuery(){
         apiRequest(search.query, (books) => {
             // Displays results from book search
             searchResults(books)
-            // what do to after search results?
-            // add to list
-            // search for a new book
-            // view my list
-            // close application
             selectionPrompt()
         })
     })
