@@ -115,6 +115,7 @@ function searchQuery(){
             // Displays results from book search
             searchResults(books)
             // Displays a new menu after results return
+
             selectionPrompt(books)
         })
     })
@@ -142,6 +143,8 @@ function start(){
         } else if (selection.choice === "View my reading list"){
             // Display my reading list
             displayReadingList(readingList)
+            // Show the main menu again
+            start()
         } else {
             // Close the application
             console.log('Goodbye!')
