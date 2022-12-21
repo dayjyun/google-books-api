@@ -11,7 +11,7 @@ function searchResults(books){
 
     for(let i = 0; i < 5; i++){
         let book = books[i]
-        console.log(`${book.volumeInfo.title} by ${book.volumeInfo.authors} Publisher: ${book.volumeInfo.publisher}`)
+        console.log(`${book.volumeInfo.title} by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
     }
 }
 
