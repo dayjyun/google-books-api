@@ -30,7 +30,7 @@ function selectionPrompt(){
         type: "list",
         name: "choice",
         message: "What would you like to do?",
-        choices: ["Search for a book", "View my reading list", "Quit"],
+        choices: ["Add book to my reading list", "Search for a book", "View my reading list", "Quit"],
       },
     ]);
 }
@@ -55,6 +55,7 @@ function searchQuery(){
             // search for a new book
             // view my list
             // close application
+            selectionPrompt()
         })
     })
 }
