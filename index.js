@@ -14,6 +14,11 @@ function displayReadingList(readingList){
 
 // Adds a book to the reading list
 function addToReadingList(searchResults){
+    let readingList = [];
+    // Check if reading list file exists
+    if (fs.existsSync("reading-list.json")) {
+        readingList = JSON.parse(fs.readFileSync("reading-list.json"));
+    }
     // Pass in the array of books
     // Add book by name
     inquirer.prompt([
@@ -29,10 +34,12 @@ function addToReadingList(searchResults){
         }
     ]).then((selection) => {
         for(let i = 0; i < searchResults.length; i++){
-            let book = readingList[i]
+            let book = searchResults[i];
             if(book === selection){
 
                 console.log(`${book} added to reading list!`)
+            } else {
+                console.log(`Unable to add book`)
             }
         }
         // Start the application again
@@ -55,7 +62,11 @@ function searchResults(books){
 }
 
 function selectionPrompt(books){
-  // view my list
+    let readingList = [];
+    // Check if reading list file exists
+    if (fs.existsSync("reading-list.json")) {
+      readingList = JSON.parse(fs.readFileSync("reading-list.json"));
+    }
 
   inquirer
     .prompt([
@@ -80,7 +91,7 @@ function selectionPrompt(books){
         searchQuery();
       } else if (selection.choice === "View my reading list") {
         // Display my reading list
-        displayReadingList();
+        displayReadingList(readingList);
       } else {
         // Quit the application
         console.log("Goodbye!");
