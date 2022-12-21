@@ -6,12 +6,13 @@ import { apiRequest } from "./apiRequest.js";
 // Displays results from book search
 function searchResults(books){
     if(!books){
-        console.log(`Book not found`)
+        console.log(`Book not found. Try again.`)
+        return searchForBookQuestion()
     }
 
     for(let i = 0; i < 5; i++){
         let book = books[i]
-        console.log(`${book.volumeInfo.title} by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
+        console.log(`"${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`)
     }
 }
 
