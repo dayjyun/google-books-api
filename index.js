@@ -1,14 +1,30 @@
 import inquirer from "inquirer";
 import request from "request";
-import fs from 'fs';
+import fs, { read } from 'fs';
 import { apiRequest } from "./apiRequest.js";
 
 // Display my reading list
-
+function displayReadingList(readingList){
+    console.log(`My Reading List: `)
+    readingList.forEach(book => {
+        `"${book.volumeInfo.title}" by ${book.volumeInfo.authors} (${book.volumeInfo.publisher})`
+    });
+}
 
 
 // Adds a book to the reading list
-
+function addToReadingList(){
+    // Pass in the array of books
+    // Add book by name
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "book",
+            message: "Enter the name of the book you want to add to your reading list: "
+        }
+    ])
+    // console.log(`${book} added to reading list!`)
+}
 
 
 // Displays results from book search
@@ -34,7 +50,9 @@ function selectionPrompt(){
       },
     ]).then((selection) => {
         if (selection.choice === "Add book to my reading list") {
-          console.log("Added");
+            // Add book to reading list
+            // what am I passing through?
+            addToReadingList()
         } else if(selection.choice === "Search for a book"){
             searchQuery()
         } else if(selection.choice === "View my reading list"){
@@ -92,6 +110,7 @@ function start(){
             searchQuery()
         } else if (selection.choice === "View my reading list"){
             // Display my reading list
+            displayReadingList(readingList)
         } else {
             // Close the application
             console.log('Goodbye!')
