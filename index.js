@@ -8,6 +8,11 @@ function searchResults(books){
     if(!books){
         console.log(`Book not found`)
     }
+
+    for(let i = 0; i < 5; i++){
+        let book = books[i]
+        console.log(`${book}`)
+    }
 }
 
 // Adds a book to the reading list
@@ -24,6 +29,7 @@ function searchForBookQuestion(){
         // Makes a request to the Google Books API
         apiRequest(search.question, (books) => {
             // Displays results from book search
+            searchResults(books)
         })
     })
 }
@@ -39,15 +45,15 @@ function start(){
     inquirer.prompt([
         {
             type: "list",
-            name: "option",
+            name: "choice",
             message: "What would you like to do?",
-            options: ["Search for a book", "View my reading list", "Quit"]
+            choices: ["Search for a book", "View my reading list", "Quit"]
         }
     ]).then((selection) => {
-        if(selection.option === "Search for a book"){
+        if(selection.choice === "Search for a book"){
             // display a search query
             searchForBookQuestion()
-        } else if (selection.option === "View my reading list"){
+        } else if (selection.choice === "View my reading list"){
             // display my reading list
         } else {
             // Close the application
