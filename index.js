@@ -34,7 +34,7 @@ function displayReadingList(readingList){
 
 
 // Adds a book to the reading list
-function addToReadingList(searchResults){
+export default function addToReadingList(searchResults){
     let readingList = [];
     // Check if reading list JSON file exists
     if (fs.existsSync("reading-list.json")) {
@@ -195,3 +195,15 @@ function start(){
 }
 
 start()
+
+// module.exports = {
+//   addToReadingList,
+// }
+
+// export default function sayHello(){
+//   return 'hello'
+// }
+
+// module.exports ={
+//   sayHello,
+// }
