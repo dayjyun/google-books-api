@@ -41,8 +41,6 @@ export default function addToReadingList(searchResults){
         readingList = JSON.parse(fs.readFileSync("reading-list.json"));
     }
 
-    let errSentence = `Invalid input. Please enter a whole number between 1 and 5.`
-
     inquirer.prompt([
         {
             type: "input",
@@ -52,7 +50,7 @@ export default function addToReadingList(searchResults){
                 if(Number.isInteger(+input) && input > 0 && input < 6){
                     return true;
                 } else {
-                    console.log(`\n${errSentence}`);
+                    console.log(`\nInvalid input. Please enter a whole number between 1 and 5.`);
                     return false;
                 }
             }
