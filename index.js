@@ -41,16 +41,23 @@ function addToReadingList(searchResults){
         readingList = JSON.parse(fs.readFileSync("reading-list.json"));
     }
 
+    let errSentence = `Invalid input. Please enter a whole number between 1 and 5.`
+
     inquirer.prompt([
         {
             type: "input",
             name: "book",
-            message: "Enter the number of the book you want to add to your reading list:",
+            message: "Enter a number between 1 and 5 for the book you want to add to your reading list:",
             validate: input => {
                 if(input > 0 && input < 6){
+                  if(input % 1 === 0) {
                     return true;
+                  } else {
+                    console.log(`\n${errSentence}`);
+                    return false;
+                  }
                 } else {
-                    console.log(`\nUnable to add book. Try again`);
+                    console.log(`\n${errSentence}`);
                     return false;
                 }
             }
@@ -63,6 +70,10 @@ function addToReadingList(searchResults){
            console.log(`\nBook is already in your reading list`);
            // Start the application again
            start();
+         } else if(selection.book % 1 !== 0) {
+          console.log(
+            `\nInvalid input. Please enter a number between 1 and 5.`
+          );
          } else {
            // Add selected book to reading list
            readingList.push(book);
