@@ -20,7 +20,7 @@ function apiRequest(query, callback) {
 
 // Display my reading list
 function displayReadingList(readingList){
-    console.log(`\nMy Reading List: ${readingList.length === 1 ? readingList.length + " Book": readingList.length + " Books"}`)
+    console.log(`\nMy Reading List: ${readingList.length} ${readingList.length === 1 ? "Book" : "Books"}`)
 
     // If there are no books on reading list
     if(!readingList.length){
