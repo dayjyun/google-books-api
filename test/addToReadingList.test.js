@@ -1,6 +1,3 @@
-// const assert = require('chai').assert;
-// const index = require('../index');
-
 import assert from "assert";
 import addToReadingList from "../index.js";
 
