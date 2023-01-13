@@ -49,13 +49,8 @@ function addToReadingList(searchResults){
             name: "book",
             message: "Enter a number between 1 and 5 for the book you want to add to your reading list:",
             validate: input => {
-                if(input > 0 && input < 6){
-                  if(input % 1 === 0) {
+                if(Number.isInteger(+input) && input > 0 && input < 6){
                     return true;
-                  } else {
-                    console.log(`\n${errSentence}`);
-                    return false;
-                  }
                 } else {
                     console.log(`\n${errSentence}`);
                     return false;
