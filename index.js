@@ -84,7 +84,7 @@ export default function addToReadingList(searchResults){
 
 
 // Displays results from book search
-function bookSearchResults(books){
+export function bookSearchResults(books){
     console.log(`\nResults: `)
     for(let i = 0; i < 5; i++){
         let book = books[i]
